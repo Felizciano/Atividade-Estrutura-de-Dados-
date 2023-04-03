@@ -1,0 +1,92 @@
+class Pilha:
+    def __init__(self, capacidade):
+        self.__capacidade = capacidade
+        self.__topo = -1
+        self.__dados = [None] * self.__capacidade
+
+    def empilhar(self, valor):
+        if self.__topo == self.__capacidade - 1:
+            print('A pilha está cheia')
+        else:
+            self.__topo += 1
+            self.__dados[self.__topo] = valor
+
+    def desempilhar(self):
+        if self.__topo == -1:
+            print('A pilha está vazia')
+        else:
+            valor = self.__dados[self.__topo]
+            self.__topo -= 1
+            return valor
+
+class Fila:
+    def __init__(self, capacidade):
+        self.__capacidade = capacidade
+        self.__dados = [None] * self.__capacidade
+        self.__inicio = 0
+        self.__fim = -1
+        self.__numero_elementos = 0
+
+    def enfileirar(self, valor):
+        if self.__fim == self.__capacidade - 1:
+            self.__fim = -1
+        self.__fim += 1
+        self.__dados[self.__fim] = valor
+        self.__numero_elementos += 1
+
+    def desenfileirar(self):
+        if self.__numero_elementos == 0:
+            print('A fila está vazia')
+        else:
+            valor = self.__dados[self.__inicio]
+            self.__inicio += 1
+            if self.__inicio == self.__capacidade:
+                self.__inicio = 0
+            self.__numero_elementos -= 1
+            return valor
+
+lista = [1, 2, 3, 4, 5]
+pilha = Pilha(5)
+fila = Fila(10)
+
+# Passo 1
+for valor in lista:
+    pilha.empilhar(valor)
+
+# Passo 2
+for i in range(5):
+    valor = pilha.desempilhar()
+    fila.enfileirar(valor)
+
+# Passo 3
+for i in range(5):
+    valor = fila.desenfileirar()
+    pilha.empilhar(valor)
+
+# Passo 4
+lista = [6, 7, 8, 9, 10]
+
+# Passo 5
+for valor in lista:
+    pilha.empilhar(valor)
+
+# Passo 2
+for i in range(5):
+    valor = pilha.desempilhar()
+    fila.enfileirar(valor)
+
+# Passo 3
+for i in range(5):
+    valor = fila.desenfileirar()
+    pilha.empilhar(valor)
+
+# Passo 6
+while True:
+    valor = fila.desenfileirar()
+    if valor == None:
+        break
+    print(valor)
+
+#Note que os números foram exibidos na mesma ordem em que foram inseridos na fila. 
+#Isso ocorre porque a implementação da pilha e da fila respeita a ordem de inserção dos elementos.
+#Quando os elementos são inseridos na pilha, eles são empilhados na ordem da lista original e, ao serem desempilhados
